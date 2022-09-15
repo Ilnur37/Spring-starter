@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                             http://www.springframework.org/schema/beans/spring-beans.xsd
+                             http://www.springframework.org/schema/context
+                             http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+    <context:property-placeholder location="classpath:application.properties"/>
+
 
     <bean id="driver" class="java.lang.String">
-        <constructor-arg type="java.lang.String" value="ProgresDriver"/>
+        <constructor-arg type="java.lang.String" value="${db.driver}"/>
     </bean>
 
     <bean id="pool1" class="com.dev.spring.database.pool.ConnectionPool"
@@ -12,9 +18,9 @@
           destroy-method="destroy"
           scope="singleton">
 
-        <constructor-arg name="username" type="java.lang.String" ref="driver"/>
+        <constructor-arg name="username" type="java.lang.String" value="${db.username}"/>
 
-        <constructor-arg name="poolsize" value="10"/>
+        <constructor-arg name="poolsize" value="${db.pool.size}"/>
 
         <constructor-arg name="args">
             <list>
@@ -32,7 +38,10 @@
             <map>
                 <entry key="url" value="qwerty"/>
                 <entry key="pass" value="123"/>
-                <entry key="driver" value-ref="driver"/>
+                <entry key="driver" value="#{driver.substring(3)}"/>
+                <entry key="test" value="#{driver.length() > 10}"/>
+                <entry key="hosts" value="#{'${db.hosts}'.split(',')}"/>
+                <entry key="curr" value="#{systemProperties['username']}"/>
             </map>
         </property>
     </bean>

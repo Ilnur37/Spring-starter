@@ -11,6 +11,7 @@
     <context:property-placeholder location="classpath:application.properties"/>
 
     <bean class="com.dev.spring.bpp.InjectBeanPostProcessor"/>
+    <bean class="com.dev.spring.bpp.TransactionBeanPostProcessor"/>
 
     <bean id="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="${db.driver}"/>

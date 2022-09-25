@@ -10,7 +10,7 @@ public class ApplicationRunner {
             var connectionPool = (context.getBean("pool1", ConnectionPool.class));
             System.out.println(connectionPool);
             var companyRepository = context.getBean("companyRepository", CrudRepository.class);
-            System.out.println(companyRepository);
+            System.out.println(companyRepository.findById(1));
         }
 
     }

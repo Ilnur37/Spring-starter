@@ -12,6 +12,7 @@
 
     <bean class="com.dev.spring.bpp.InjectBeanPostProcessor"/>
     <bean class="com.dev.spring.bpp.TransactionBeanPostProcessor"/>
+    <bean class="com.dev.spring.bpp.AuditingBeanPostProcessor"/>
 
     <bean id="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="${db.driver}"/>
